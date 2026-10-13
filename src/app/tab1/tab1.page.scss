@@ -114,6 +114,21 @@
         background: var(--app-ink);
         color: var(--app-bg);
       }
+
+      &.resume-chip {
+        background: var(--app-card-bg-subtle);
+        border: 1.5px solid var(--app-ink);
+        font-weight: 700;
+
+        ion-icon {
+          font-size: 0.95rem;
+        }
+
+        &:hover {
+          background: var(--app-ink);
+          color: var(--app-bg);
+        }
+      }
     }
   }
 }

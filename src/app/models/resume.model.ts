@@ -7,6 +7,7 @@ export interface PersonalProfile {
   github: string;
   linkedin: string;
   phone: string;
+  resumeUrl?: string;
   summaryLead: string;
   summaryBody: string;
   specializations: string[];

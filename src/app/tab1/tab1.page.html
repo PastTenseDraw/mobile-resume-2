@@ -53,6 +53,17 @@
           <ion-icon name="call-outline"></ion-icon>
           <span>{{ resumeService.profile()?.phone }}</span>
         </a>
+        <a
+          [href]="resumeService.profile()?.resumeUrl || 'assets/resume/Drew_Baker_Resume_2026_designed.pdf'"
+          target="_blank"
+          rel="noopener"
+          download="Drew_Baker_Resume_2026.pdf"
+          class="link-chip resume-chip"
+          title="Download or view resume PDF"
+        >
+          <ion-icon name="download-outline"></ion-icon>
+          <span>Resume (PDF)</span>
+        </a>
       </div>
     </header>
 

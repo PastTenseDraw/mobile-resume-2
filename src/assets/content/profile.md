@@ -7,6 +7,7 @@ email: drew@pasttensedraw.com
 github: github.com/PastTenseDraw
 linkedin: linkedin.com/in/drew-baker
 phone: email for #
+resumeUrl: assets/resume/Drew_Baker_Resume_2026_designed.pdf
 summaryLead: Architecting beautiful user ecosystems, micro-frontends, and performance-first distributed client systems.
 ---
 

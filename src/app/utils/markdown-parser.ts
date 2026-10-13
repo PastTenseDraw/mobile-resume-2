@@ -67,6 +67,7 @@ export function parseProfileMarkdown(markdown: string): PersonalProfile {
     github: attributes['github'] || '',
     linkedin: attributes['linkedin'] || '',
     phone: attributes['phone'] || '',
+    resumeUrl: attributes['resumeUrl'] || 'assets/resume/Drew_Baker_Resume_2026_designed.pdf',
     summaryLead: attributes['summaryLead'] || '',
     summaryBody: mainSummary,
     specializations:

@@ -40,6 +40,7 @@ Main summary paragraph here.
 
     const profile = parseProfileMarkdown(profileMd);
     expect(profile.name).toBe('Jane Doe');
+    expect(profile.resumeUrl).toBe('assets/resume/Drew_Baker_Resume_2026_designed.pdf');
     expect(profile.summaryBody).toBe('Main summary paragraph here.');
     expect(profile.specializations).toEqual(['Mobile Systems', 'Cloud Architecture']);
   });
