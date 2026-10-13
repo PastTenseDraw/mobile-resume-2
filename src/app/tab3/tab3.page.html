@@ -135,8 +135,8 @@
             <h1 class="reader-title">{{ post.title }}</h1>
 
             <div class="reader-byline mono">
-              <span>BY {{ resumeService.profile().name | uppercase }}</span>
-              <span class="author-role">{{ resumeService.profile().roleTitle }}</span>
+              <span>BY {{ resumeService.profile()?.name | uppercase }}</span>
+              <span class="author-role">{{ resumeService.profile()?.roleTitle }}</span>
             </div>
 
             <div class="hairline"></div>
