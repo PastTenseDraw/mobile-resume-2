@@ -59,9 +59,9 @@ export function parseProfileMarkdown(markdown: string): PersonalProfile {
   }
 
   return {
-    name: attributes['name'] || 'Alexander R. Morgan',
-    roleTitle: attributes['roleTitle'] || 'Staff Mobile Architect',
-    location: attributes['location'] || 'San Francisco, CA',
+    name: attributes['name'] || 'Drew Baker',
+    roleTitle: attributes['roleTitle'] || 'Senior Software Engineer',
+    location: attributes['location'] || 'DFW',
     statusBadge: attributes['statusBadge'] || 'Available for Select Opportunities',
     email: attributes['email'] || '',
     github: attributes['github'] || '',

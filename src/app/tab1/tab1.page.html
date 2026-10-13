@@ -21,37 +21,37 @@
       <div class="masthead-top">
         <span class="status-indicator splash-pill">
           <span class="pulse-dot"></span>
-          {{ resumeService.profile().statusBadge }}
+          {{ resumeService.profile()?.statusBadge }}
         </span>
         <span class="edition-date mono">{{ 'OCTOBER 2026' }}</span>
       </div>
 
-      <h1 class="person-name">{{ resumeService.profile().name }}</h1>
-      <p class="role-subtitle">{{ resumeService.profile().roleTitle }}</p>
+      <h1 class="person-name">{{ resumeService.profile()?.name }}</h1>
+      <p class="role-subtitle">{{ resumeService.profile()?.roleTitle }}</p>
 
       <div class="meta-strip">
         <div class="meta-item">
           <ion-icon name="location-outline"></ion-icon>
-          <span>{{ resumeService.profile().location }}</span>
+          <span>{{ resumeService.profile()?.location }}</span>
         </div>
-        <div class="meta-item click-copy" (click)="copyContact(resumeService.profile().email, 'Email')">
+        <div class="meta-item click-copy" (click)="copyContact(resumeService.profile()?.email ?? '', 'Email')">
           <ion-icon name="mail-outline"></ion-icon>
-          <span>{{ resumeService.profile().email }}</span>
+          <span>{{ resumeService.profile()?.email }}</span>
         </div>
       </div>
 
       <div class="links-strip">
-        <a [href]="'https://' + resumeService.profile().github" target="_blank" rel="noopener" class="link-chip">
+        <a [href]="'https://' + resumeService.profile()?.github" target="_blank" rel="noopener" class="link-chip">
           <ion-icon name="logo-github"></ion-icon>
           <span>GitHub</span>
         </a>
-        <a [href]="'https://' + resumeService.profile().linkedin" target="_blank" rel="noopener" class="link-chip">
+        <a [href]="'https://' + resumeService.profile()?.linkedin" target="_blank" rel="noopener" class="link-chip">
           <ion-icon name="logo-linkedin"></ion-icon>
           <span>LinkedIn</span>
         </a>
-        <a [href]="'tel:' + resumeService.profile().phone" class="link-chip">
+        <a [href]="'tel:' + resumeService.profile()?.phone" class="link-chip">
           <ion-icon name="call-outline"></ion-icon>
-          <span>{{ resumeService.profile().phone }}</span>
+          <span>{{ resumeService.profile()?.phone }}</span>
         </a>
       </div>
     </header>
@@ -67,16 +67,16 @@
 
       <div class="summary-box">
         <p class="lead-quote">
-          "{{ resumeService.profile().summaryLead }}"
+          "{{ resumeService.profile()?.summaryLead }}"
         </p>
         <p class="summary-body">
-          {{ resumeService.profile().summaryBody }}
+          {{ resumeService.profile()?.summaryBody }}
         </p>
 
         <div class="specializations-list">
           <h4 class="spec-heading mono">CORE SPECIALIZATIONS:</h4>
           <ul>
-            @for (spec of resumeService.profile().specializations; track spec) {
+            @for (spec of resumeService.profile()?.specializations; track spec) {
               <li>
                 <span class="bullet-marker">■</span>
                 <span>{{ spec }}</span>
