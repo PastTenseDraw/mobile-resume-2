@@ -4,10 +4,7 @@
   "skills": "assets/content/skills.md",
   "certifications": "assets/content/certifications.md",
   "experiences": [
-    "assets/content/experiences/vanguard-systems.md",
-    "assets/content/experiences/chronicle-health.md",
-    "assets/content/experiences/apex-mobility.md",
-    "assets/content/experiences/kinetic-logic.md"
+    "assets/content/experiences/h-e-b.md"
   ],
   "blogs": [
     "assets/content/blogs/monochrome-editorial-ui.md",
