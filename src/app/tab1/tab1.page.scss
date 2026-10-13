@@ -1,0 +1,422 @@
+.toolbar-brand {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+  width: 100%;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  color: var(--app-ink);
+
+  .masthead-tag {
+    border-bottom: 2px solid var(--app-ink);
+    padding-bottom: 2px;
+  }
+
+  .masthead-issue {
+    color: var(--app-ink-muted);
+  }
+}
+
+.masthead {
+  padding-top: 8px;
+
+  .masthead-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+
+    .edition-date {
+      font-size: 0.75rem;
+      color: var(--app-ink-muted);
+      letter-spacing: 0.05em;
+    }
+  }
+
+  .person-name {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin: 4px 0 6px 0;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--app-ink);
+  }
+
+  .role-subtitle {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--app-ink-muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin: 0 0 16px 0;
+  }
+
+  .meta-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-bottom: 14px;
+
+    .meta-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      color: var(--app-ink-muted);
+
+      ion-icon {
+        font-size: 0.95rem;
+        color: var(--app-ink);
+      }
+
+      &.click-copy {
+        cursor: pointer;
+        border-bottom: 1px dotted var(--app-ink-muted);
+        transition: color 0.15s ease;
+
+        &:active {
+          color: var(--app-ink);
+        }
+      }
+    }
+  }
+
+  .links-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+
+    .link-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      color: var(--app-ink);
+      border: 1px solid var(--app-border-bold);
+      background: var(--app-card-bg);
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 600;
+      transition: all 0.15s ease;
+
+      ion-icon {
+        font-size: 0.9rem;
+      }
+
+      &:active {
+        background: var(--app-ink);
+        color: var(--app-bg);
+      }
+    }
+  }
+}
+
+/* Section 1: Summary */
+.summary-box {
+  .lead-quote {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--app-ink);
+    line-height: 1.45;
+    margin: 0 0 14px 0;
+    padding-left: 12px;
+    border-left: 2px solid var(--app-ink);
+  }
+
+  .summary-body {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: var(--app-ink-muted);
+    margin: 0 0 16px 0;
+  }
+
+  .specializations-list {
+    background: var(--app-card-bg-subtle);
+    padding: 14px 16px;
+    border: 1px solid var(--app-border);
+    border-radius: 6px;
+
+    .spec-heading {
+      font-size: 0.72rem;
+      color: var(--app-ink);
+      font-weight: 700;
+      margin: 0 0 10px 0;
+      letter-spacing: 0.08em;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      li {
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        font-size: 0.85rem;
+        color: var(--app-ink);
+        line-height: 1.35;
+
+        .bullet-marker {
+          font-size: 0.55rem;
+          margin-top: 4px;
+          color: var(--app-ink-subtle);
+        }
+      }
+    }
+  }
+}
+
+/* Section 2: Companies Table */
+.companies-table {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .company-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 12px 14px;
+    background: var(--app-card-bg);
+    border: 1px solid var(--app-border);
+    border-radius: 6px;
+    gap: 12px;
+
+    &.current-company {
+      border-left: 3px solid var(--app-splash);
+    }
+
+    .company-left {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+
+      .company-name-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        .company-title {
+          font-family: var(--font-serif);
+          font-size: 1.05rem;
+          font-weight: 700;
+          color: var(--app-ink);
+        }
+
+        .current-badge {
+          font-size: 0.65rem;
+          padding: 1px 6px;
+        }
+      }
+
+      .company-role {
+        font-size: 0.85rem;
+        color: var(--app-ink-muted);
+      }
+    }
+
+    .company-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      text-align: right;
+      gap: 2px;
+
+      .company-tenure {
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: var(--app-ink);
+      }
+
+      .company-loc {
+        font-size: 0.72rem;
+        color: var(--app-ink-subtle);
+      }
+    }
+  }
+}
+
+.section-action-bar {
+  margin-top: 14px;
+
+  .editorial-action-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--app-ink);
+    border-bottom: 1.5px solid var(--app-ink);
+    padding-bottom: 3px;
+    transition: transform 0.15s ease;
+
+    ion-icon {
+      font-size: 0.95rem;
+    }
+
+    &:active {
+      transform: translateX(3px);
+    }
+  }
+}
+
+/* Section 3: Skills */
+.skills-container {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  .skill-category-block {
+    .category-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--app-ink-muted);
+      letter-spacing: 0.06em;
+      margin: 0 0 8px 0;
+    }
+
+    .skill-chips-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+
+      .skill-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 0.78rem;
+        padding: 5px 10px;
+        background: var(--app-card-bg);
+        border: 1px solid var(--app-border);
+        border-radius: 4px;
+        color: var(--app-ink);
+        font-weight: 500;
+
+        &.highlighted-pill {
+          border-color: var(--app-border-bold);
+          font-weight: 700;
+          background: var(--app-card-bg-subtle);
+
+          .splash-star {
+            color: var(--app-splash);
+            font-size: 0.8rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Section 4: Certifications & Awards */
+.awards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  .award-item {
+    padding: 14px;
+    background: var(--app-card-bg);
+    border: 1px solid var(--app-border);
+    border-radius: 6px;
+
+    &.award-highlight {
+      border-left: 3px solid var(--app-splash);
+    }
+
+    .award-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+
+      .award-type-badge {
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        padding: 2px 6px;
+        border-radius: 2px;
+        background: var(--app-card-bg-subtle);
+        color: var(--app-ink);
+
+        &.splash-tag {
+          background: var(--app-splash-bg);
+          color: var(--app-splash);
+          border: 1px solid var(--app-splash-border);
+        }
+      }
+
+      .award-year {
+        font-size: 0.75rem;
+        color: var(--app-ink-subtle);
+      }
+    }
+
+    .award-title {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--app-ink);
+      margin: 0 0 4px 0;
+    }
+
+    .award-issuer {
+      font-size: 0.82rem;
+      color: var(--app-ink-muted);
+      margin: 0 0 6px 0;
+
+      .cert-id {
+        font-size: 0.75rem;
+        color: var(--app-ink-subtle);
+      }
+    }
+
+    .award-desc {
+      font-size: 0.82rem;
+      line-height: 1.45;
+      color: var(--app-ink-muted);
+      margin: 0;
+    }
+  }
+}
+
+/* Colophon */
+.editorial-colophon {
+  margin-top: 36px;
+  text-align: center;
+  padding-top: 24px;
+  border-top: 1px solid var(--app-border);
+
+  .colophon-seal {
+    font-size: 1.3rem;
+    color: var(--app-ink-subtle);
+    margin-bottom: 8px;
+  }
+
+  .colophon-text {
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    color: var(--app-ink-subtle);
+    line-height: 1.6;
+    margin: 0 0 6px 0;
+  }
+
+  .colophon-copy {
+    font-size: 0.72rem;
+    color: var(--app-ink-subtle);
+    margin: 0;
+  }
+}

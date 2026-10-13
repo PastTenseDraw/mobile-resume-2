@@ -1,0 +1,127 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <div class="toolbar-brand">
+      <span class="masthead-tag">EXPERIENCE DOSSIER</span>
+      <span class="masthead-issue">CHRONOLOGICAL</span>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="page-container">
+    @if (resumeService.isLoading()) {
+      <div class="editorial-loading mono">
+        <span class="loading-box">■</span>
+        <span>LOADING EXPERIENCE FROM MARKDOWN FILES...</span>
+      </div>
+    }
+
+    <!-- Page Header -->
+    <header class="experience-header">
+      <div class="section-kicker">
+        <span class="kicker-num">02</span>
+        <span>CAREER TRACK & ENGAGEMENTS</span>
+      </div>
+
+      <h1 class="page-title">Work Experience</h1>
+      <p class="page-subtitle">
+        A chronological breakdown of leadership, architectural contributions, and shipped mobile solutions.
+      </p>
+
+      <!-- Filter Controls -->
+      <div class="filter-controls">
+        <button
+          type="button"
+          class="filter-btn mono"
+          [class.active]="selectedFilter() === 'all'"
+          (click)="filterRoles('all')"
+        >
+          ALL POSITIONS ({{ resumeService.experiences().length }})
+        </button>
+        <button
+          type="button"
+          class="filter-btn mono"
+          [class.active]="selectedFilter() === 'current'"
+          (click)="filterRoles('current')"
+        >
+          CURRENT ONLY
+        </button>
+      </div>
+    </header>
+
+    <div class="hairline"></div>
+
+    <!-- Cards List -->
+    <div class="cards-stack">
+      @for (item of filteredExperiences; track item.id; let idx = $index) {
+        <article
+          class="experience-card print-card"
+          [class.current-card]="item.isCurrent"
+        >
+          <!-- Card Header -->
+          <div class="card-header">
+            <div class="company-role-block">
+              <div class="company-row">
+                <h2 class="company-name">{{ item.company }}</h2>
+                @if (item.isCurrent) {
+                  <span class="current-tag splash-pill">
+                    <span class="pulse-dot"></span>
+                    ACTIVE ROLE
+                  </span>
+                }
+              </div>
+              <h3 class="role-designation">{{ item.role }}</h3>
+            </div>
+
+            <!-- Time Worked Badge -->
+            <div class="tenure-badge mono">
+              <ion-icon name="calendar-outline"></ion-icon>
+              <span>{{ item.period }}</span>
+            </div>
+          </div>
+
+          <div class="location-row mono">
+            <ion-icon name="location-outline"></ion-icon>
+            <span>{{ item.location }}</span>
+          </div>
+
+          <!-- Highlight Metric (Splash of color attention-getter) -->
+          @if (item.highlightMetric) {
+            <div class="metric-callout">
+              <span class="metric-icon">⚡</span>
+              <span class="metric-label mono">KEY IMPACT:</span>
+              <span class="metric-value">{{ item.highlightMetric }}</span>
+            </div>
+          }
+
+          <div class="card-divider"></div>
+
+          <!-- Blurb / Bullet points -->
+          <div class="blurb-section">
+            <h4 class="blurb-heading mono">RESPONSIBILITIES & OUTCOMES:</h4>
+            <ul class="blurb-bullets">
+              @for (bullet of item.blurb; track bullet) {
+                <li>
+                  <span class="bullet-point">■</span>
+                  <span class="bullet-text">{{ bullet }}</span>
+                </li>
+              }
+            </ul>
+          </div>
+
+          <!-- Technologies Footer -->
+          @if (item.technologies.length > 0) {
+            <div class="card-footer">
+              <span class="tech-label mono">TECH STACK:</span>
+              <div class="tech-pills">
+                @for (tech of item.technologies; track tech) {
+                  <span class="tech-pill mono">{{ tech }}</span>
+                }
+              </div>
+            </div>
+          }
+        </article>
+      }
+    </div>
+  </div>
+</ion-content>

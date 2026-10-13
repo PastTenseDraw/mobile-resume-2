@@ -1,0 +1,213 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <div class="toolbar-brand">
+      <span class="masthead-tag">CURRICULUM VITAE</span>
+      <span class="masthead-issue">EDITION 2026.1</span>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="page-container">
+    @if (resumeService.isLoading()) {
+      <div class="editorial-loading mono">
+        <span class="loading-box">■</span>
+        <span>PARSING DOSSIER FROM MARKDOWN FILES...</span>
+      </div>
+    }
+
+    <!-- Editorial Header / Masthead -->
+    <header class="masthead">
+      <div class="masthead-top">
+        <span class="status-indicator splash-pill">
+          <span class="pulse-dot"></span>
+          {{ resumeService.profile().statusBadge }}
+        </span>
+        <span class="edition-date mono">{{ 'OCTOBER 2026' }}</span>
+      </div>
+
+      <h1 class="person-name">{{ resumeService.profile().name }}</h1>
+      <p class="role-subtitle">{{ resumeService.profile().roleTitle }}</p>
+
+      <div class="meta-strip">
+        <div class="meta-item">
+          <ion-icon name="location-outline"></ion-icon>
+          <span>{{ resumeService.profile().location }}</span>
+        </div>
+        <div class="meta-item click-copy" (click)="copyContact(resumeService.profile().email, 'Email')">
+          <ion-icon name="mail-outline"></ion-icon>
+          <span>{{ resumeService.profile().email }}</span>
+        </div>
+      </div>
+
+      <div class="links-strip">
+        <a [href]="'https://' + resumeService.profile().github" target="_blank" rel="noopener" class="link-chip">
+          <ion-icon name="logo-github"></ion-icon>
+          <span>GitHub</span>
+        </a>
+        <a [href]="'https://' + resumeService.profile().linkedin" target="_blank" rel="noopener" class="link-chip">
+          <ion-icon name="logo-linkedin"></ion-icon>
+          <span>LinkedIn</span>
+        </a>
+        <a [href]="'tel:' + resumeService.profile().phone" class="link-chip">
+          <ion-icon name="call-outline"></ion-icon>
+          <span>{{ resumeService.profile().phone }}</span>
+        </a>
+      </div>
+    </header>
+
+    <div class="hairline-bold"></div>
+
+    <!-- Section 1: Who am I? (Personal summary) -->
+    <section class="resume-section">
+      <div class="section-kicker">
+        <span class="kicker-num">01</span>
+        <span>WHO AM I?</span>
+      </div>
+
+      <div class="summary-box">
+        <p class="lead-quote">
+          "{{ resumeService.profile().summaryLead }}"
+        </p>
+        <p class="summary-body">
+          {{ resumeService.profile().summaryBody }}
+        </p>
+
+        <div class="specializations-list">
+          <h4 class="spec-heading mono">CORE SPECIALIZATIONS:</h4>
+          <ul>
+            @for (spec of resumeService.profile().specializations; track spec) {
+              <li>
+                <span class="bullet-marker">■</span>
+                <span>{{ spec }}</span>
+              </li>
+            }
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="hairline"></div>
+
+    <!-- Section 2: Places I've Worked -->
+    <section class="resume-section">
+      <div class="section-kicker">
+        <span class="kicker-num">02</span>
+        <span>PLACES I'VE WORKED</span>
+      </div>
+
+      <div class="companies-table">
+        @for (company of resumeService.placesWorked(); track company.id) {
+          <div class="company-row" [class.current-company]="company.isCurrent">
+            <div class="company-left">
+              <div class="company-name-row">
+                <span class="company-title">{{ company.name }}</span>
+                @if (company.isCurrent) {
+                  <span class="current-badge splash-pill">CURRENT</span>
+                }
+              </div>
+              <span class="company-role">{{ company.role }}</span>
+            </div>
+            <div class="company-right">
+              <span class="company-tenure mono">{{ company.tenure }}</span>
+              <span class="company-loc mono">{{ company.location }}</span>
+            </div>
+          </div>
+        }
+      </div>
+
+      <div class="section-action-bar">
+        <a routerLink="/tabs/experience" class="editorial-action-link">
+          <span>Read In-Depth Experience Cards & Impact</span>
+          <ion-icon name="arrow-forward-outline"></ion-icon>
+        </a>
+      </div>
+    </section>
+
+    <div class="hairline"></div>
+
+    <!-- Section 3: Skills -->
+    <section class="resume-section">
+      <div class="section-kicker">
+        <span class="kicker-num">03</span>
+        <span>SKILLS & TECH STACK</span>
+      </div>
+
+      <div class="skills-container">
+        @for (group of resumeService.skills(); track group.category) {
+          <div class="skill-category-block">
+            <h4 class="category-title mono">{{ group.category }}</h4>
+            <div class="skill-chips-wrap">
+              @for (item of group.items; track item.name) {
+                <span
+                  class="skill-pill"
+                  [class.highlighted-pill]="item.isHighlighted"
+                >
+                  @if (item.isHighlighted) {
+                    <span class="splash-star">★</span>
+                  }
+                  {{ item.name }}
+                </span>
+              }
+            </div>
+          </div>
+        }
+      </div>
+    </section>
+
+    <div class="hairline"></div>
+
+    <!-- Section 4: Certifications and Awards -->
+    <section class="resume-section">
+      <div class="section-kicker">
+        <span class="kicker-num">04</span>
+        <span>CERTIFICATIONS & AWARDS</span>
+      </div>
+
+      <div class="awards-list">
+        @for (cert of resumeService.certificationsAwards(); track cert.id) {
+          <div
+            class="award-item"
+            [class.award-highlight]="cert.isHighlighted"
+          >
+            <div class="award-header">
+              <div class="award-type-badge mono" [class.splash-tag]="cert.isHighlighted">
+                {{ cert.type | uppercase }}
+              </div>
+              <span class="award-year mono">{{ cert.year }}</span>
+            </div>
+
+            <h3 class="award-title">{{ cert.title }}</h3>
+            <p class="award-issuer">
+              <span>{{ cert.issuer }}</span>
+              @if (cert.credentialId) {
+                <span class="cert-id mono">· Credential: {{ cert.credentialId }}</span>
+              }
+            </p>
+
+            @if (cert.description) {
+              <p class="award-desc">{{ cert.description }}</p>
+            }
+          </div>
+        }
+      </div>
+    </section>
+
+    <!-- Editorial Colophon / Footer -->
+    <footer class="editorial-colophon">
+      <div class="colophon-seal">DB</div>
+      <p class="colophon-text mono">
+        HANDCRAFTED EDITORIAL MOBILE APPLICATION<br />
+        ANGULAR 22 · IONIC 9 · TYPESCRIPT · MONOCHROME SYSTEM
+      </p>
+      <p class="colophon-copy">© 2026 {{ resumeService.profile().name }}. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <ion-toast
+    [isOpen]="isToastOpen"
+    [message]="toastMessage"
+    [duration]="2500"
+    (didDismiss)="isToastOpen = false"
+  ></ion-toast>
+</ion-content>

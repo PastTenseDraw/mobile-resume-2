@@ -1,0 +1,292 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <div class="toolbar-brand">
+      <span class="masthead-tag">THE JOURNAL</span>
+      <span class="masthead-issue">ESSAYS & DISPATCHES</span>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="page-container">
+    @if (resumeService.isLoading()) {
+      <div class="editorial-loading mono">
+        <span class="loading-box">■</span>
+        <span>INDEXING DISPATCHES FROM MARKDOWN FILES...</span>
+      </div>
+    }
+
+    <!-- Masthead -->
+    <header class="blog-header">
+      <div class="section-kicker">
+        <span class="kicker-num">03</span>
+        <span>ENGINEERING DISPATCHES</span>
+      </div>
+
+      <div class="header-action-row">
+        <div>
+          <h1 class="page-title">Articles & Essays</h1>
+          <p class="page-subtitle">
+            Long-form reflections on cross-platform mobile engineering, typography, and reactive systems.
+          </p>
+        </div>
+
+        <button type="button" class="post-action-btn" (click)="openCompose()">
+          <ion-icon name="add-outline"></ion-icon>
+          <span>NEW ENTRY</span>
+        </button>
+      </div>
+
+      <!-- Categories Filter -->
+      <div class="categories-bar">
+        @for (cat of categories; track cat) {
+          <button
+            type="button"
+            class="cat-chip mono"
+            [class.active]="selectedCategory() === cat"
+            (click)="setCategory(cat)"
+          >
+            {{ cat }}
+          </button>
+        }
+      </div>
+    </header>
+
+    <div class="hairline"></div>
+
+    <!-- Articles Feed -->
+    <div class="articles-feed">
+      @if (filteredPosts.length === 0) {
+        <div class="empty-state">
+          <p class="mono">No dispatches found in this category.</p>
+        </div>
+      }
+
+      @for (post of filteredPosts; track post.id) {
+        <article class="article-card print-card" (click)="openReader(post)">
+          <div class="article-meta-row">
+            <div class="meta-left mono">
+              <span class="post-date">{{ post.date }}</span>
+              <span class="meta-sep">/</span>
+              <span class="post-time">{{ post.readTime }}</span>
+              <span class="meta-sep">/</span>
+              <span class="post-cat">{{ post.category }}</span>
+            </div>
+
+            @if (post.isFeatured) {
+              <span class="splash-pill">
+                <span class="pulse-dot"></span>
+                FEATURED
+              </span>
+            }
+          </div>
+
+          <h2 class="article-title">{{ post.title }}</h2>
+
+          <p class="article-excerpt">
+            {{ post.excerpt }}
+          </p>
+
+          <div class="article-card-footer">
+            <div class="tags-cluster">
+              @for (tag of post.tags; track tag) {
+                <span class="tag-pill mono">#{{ tag }}</span>
+              }
+            </div>
+
+            <button type="button" class="read-link mono">
+              <span>Read Article</span>
+              <ion-icon name="arrow-forward-outline"></ion-icon>
+            </button>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+
+  <!-- ARTICLE READER MODAL -->
+  <ion-modal [isOpen]="isReaderOpen()" (didDismiss)="closeReader()">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <div class="reader-toolbar-title mono">DISPATCH READER</div>
+          <ion-buttons slot="end">
+            <ion-button (click)="closeReader()" class="modal-close-btn">
+              <ion-icon name="close-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content class="reader-content">
+        @if (activePost(); as post) {
+          <article class="reader-article-body">
+            <div class="reader-meta mono">
+              <span>{{ post.date }}</span>
+              <span>·</span>
+              <span>{{ post.readTime }}</span>
+              <span>·</span>
+              <span class="category-name">{{ post.category }}</span>
+              @if (post.isFeatured) {
+                <span class="splash-pill reader-featured-badge">FEATURED</span>
+              }
+            </div>
+
+            <h1 class="reader-title">{{ post.title }}</h1>
+
+            <div class="reader-byline mono">
+              <span>BY {{ resumeService.profile().name | uppercase }}</span>
+              <span class="author-role">{{ resumeService.profile().roleTitle }}</span>
+            </div>
+
+            <div class="hairline"></div>
+
+            <div class="reader-text">
+              @for (paragraph of post.content; track paragraph; let isFirst = $first) {
+                <p [class.lead-paragraph]="isFirst">
+                  {{ paragraph }}
+                </p>
+              }
+            </div>
+
+            <div class="hairline-bold"></div>
+
+            <div class="reader-footer-tags">
+              <span class="tags-label mono">FILED UNDER:</span>
+              <div class="tags-list">
+                @for (tag of post.tags; track tag) {
+                  <span class="reader-tag-chip mono">#{{ tag }}</span>
+                }
+              </div>
+            </div>
+
+            <div class="reader-close-action">
+              <button type="button" class="back-btn mono" (click)="closeReader()">
+                ← RETURN TO JOURNAL
+              </button>
+            </div>
+          </article>
+        }
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <!-- COMPOSE NEW ENTRY MODAL -->
+  <ion-modal [isOpen]="isComposeOpen()" (didDismiss)="closeCompose()">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <div class="reader-toolbar-title mono">COMPOSE NEW ENTRY</div>
+          <ion-buttons slot="end">
+            <ion-button (click)="closeCompose()" class="modal-close-btn">
+              <ion-icon name="close-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content class="compose-content">
+        <form class="compose-form" (submit)="$event.preventDefault(); publishPost()">
+          <div class="form-header">
+            <h2 class="compose-heading">Draft a New Dispatch</h2>
+            <p class="compose-sub">
+              Your post will immediately be formatted in high-contrast editorial style and published to the journal.
+            </p>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label mono">ENTRY TITLE *</label>
+            <input
+              type="text"
+              class="form-input"
+              placeholder="e.g. Architectural Trade-offs in Mobile Storage"
+              [(ngModel)]="newTitle"
+              name="title"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label mono">CATEGORY</label>
+            <select
+              class="form-select mono"
+              [(ngModel)]="newCategory"
+              name="category"
+            >
+              <option value="Architecture">Architecture</option>
+              <option value="Design Systems">Design Systems</option>
+              <option value="Mobile Engineering">Mobile Engineering</option>
+              <option value="DevLog">DevLog</option>
+              <option value="General">General</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label mono">SUMMARY / EXCERPT (OPTIONAL)</label>
+            <input
+              type="text"
+              class="form-input"
+              placeholder="Brief 1-2 sentence overview..."
+              [(ngModel)]="newExcerpt"
+              name="excerpt"
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label mono">DISPATCH BODY CONTENT *</label>
+            <textarea
+              class="form-textarea"
+              rows="8"
+              placeholder="Write your article here. Separate paragraphs with line breaks..."
+              [(ngModel)]="newContent"
+              name="content"
+              required
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label mono">TAGS (COMMA SEPARATED)</label>
+            <input
+              type="text"
+              class="form-input mono"
+              placeholder="Ionic, Angular, Performance, UX"
+              [(ngModel)]="newTags"
+              name="tags"
+            />
+          </div>
+
+          <div class="form-checkbox-row">
+            <label class="checkbox-label">
+              <input
+                type="checkbox"
+                [(ngModel)]="newIsFeatured"
+                name="isFeatured"
+              />
+              <span class="mono">Highlight with Featured Attention Badge</span>
+            </label>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="submit-publish-btn mono">
+              PUBLISH ENTRY TO JOURNAL
+            </button>
+            <button
+              type="button"
+              class="cancel-btn mono"
+              (click)="closeCompose()"
+            >
+              DISCARD DRAFT
+            </button>
+          </div>
+        </form>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <ion-toast
+    [isOpen]="isToastOpen"
+    [message]="toastMessage"
+    [duration]="2500"
+    (didDismiss)="isToastOpen = false"
+  ></ion-toast>
+</ion-content>

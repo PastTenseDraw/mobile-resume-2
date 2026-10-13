@@ -1,0 +1,17 @@
+{
+  "profile": "assets/content/profile.md",
+  "placesWorked": "assets/content/places-worked.md",
+  "skills": "assets/content/skills.md",
+  "certifications": "assets/content/certifications.md",
+  "experiences": [
+    "assets/content/experiences/vanguard-systems.md",
+    "assets/content/experiences/chronicle-health.md",
+    "assets/content/experiences/apex-mobility.md",
+    "assets/content/experiences/kinetic-logic.md"
+  ],
+  "blogs": [
+    "assets/content/blogs/monochrome-editorial-ui.md",
+    "assets/content/blogs/ionic-9-angular-22-signals.md",
+    "assets/content/blogs/offline-first-sync.md"
+  ]
+}

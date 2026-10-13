@@ -1,0 +1,216 @@
+/* App Global CSS */
+@import "@ionic/angular/css/core.css";
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+/* Print / Editorial Typography & Base Styles */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body, html, ion-app, ion-content {
+  font-family: var(--font-sans);
+  background-color: var(--app-bg) !important;
+  --background: var(--app-bg) !important;
+  color: var(--app-ink) !important;
+  letter-spacing: -0.01em;
+}
+
+/* Serif Headings */
+h1, h2, h3, .serif-heading {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  color: var(--app-ink);
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+}
+
+/* Mono Metadata */
+.mono {
+  font-family: var(--font-mono);
+  letter-spacing: -0.02em;
+}
+
+/* Editorial Category Headers (e.g. 01 / WHO AM I) */
+.section-kicker {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--app-ink);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--app-border-bold);
+
+  .kicker-num {
+    font-size: 0.68rem;
+    padding: 1px 4px;
+    background: var(--app-ink);
+    color: var(--app-bg);
+    border-radius: 2px;
+  }
+}
+
+/* Fine Hairline Dividers */
+.hairline {
+  height: 1px;
+  background-color: var(--app-border);
+  margin: 18px 0;
+  border: none;
+}
+
+.hairline-bold {
+  height: 1.5px;
+  background-color: var(--app-border-bold);
+  margin: 20px 0;
+  border: none;
+}
+
+/* Splashes of Color (For ultra-important highlights / status) */
+.splash-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--app-splash-bg);
+  color: var(--app-splash);
+  border: 1px solid var(--app-splash-border);
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+
+  .pulse-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--app-splash);
+    box-shadow: 0 0 0 2px rgba(217, 4, 41, 0.25);
+  }
+}
+
+.splash-highlight {
+  color: var(--app-splash) !important;
+  font-weight: 700;
+}
+
+.splash-border-left {
+  border-left: 3px solid var(--app-splash) !important;
+}
+
+/* Clean Print Card (Newspaper broadsheet aesthetic) */
+.print-card {
+  background: var(--app-card-bg);
+  border: 1px solid var(--app-border-bold);
+  border-radius: 4px;
+  box-shadow: 2px 2px 0px rgba(18, 18, 18, 0.08);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+  &:active {
+    transform: translateY(1px);
+    box-shadow: 1px 1px 0px rgba(18, 18, 18, 0.08);
+  }
+}
+
+/* Modal Newspaper Styling */
+ion-modal {
+  --background: var(--app-bg);
+  --border-radius: 6px;
+
+  &::part(content) {
+    background: var(--app-bg);
+    border: 1.5px solid var(--app-border-bold);
+  }
+}
+
+/* Tab Bar Minimal Clean Look */
+ion-tab-bar {
+  --background: var(--app-bg);
+  border-top: 1.5px solid var(--app-border-bold);
+  height: 58px;
+
+  ion-tab-button {
+    --color: var(--app-ink-subtle);
+    --color-selected: var(--app-ink);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+
+    ion-icon {
+      font-size: 1.25rem;
+      margin-bottom: 2px;
+    }
+  }
+}
+
+/* Header & Toolbar Customization */
+ion-toolbar {
+  --background: var(--app-bg);
+  --color: var(--app-ink);
+  --border-color: var(--app-border-bold);
+  --border-width: 0 0 1.5px 0;
+  --min-height: 54px;
+}
+
+ion-title {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+}
+
+/* Responsive Content Wrap for Tablets & Desktop */
+.page-container {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 18px 16px 40px 16px;
+}
+
+/* Editorial Minimal Loading Bar */
+.editorial-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 16px;
+  background: var(--app-card-bg-subtle);
+  border: 1px dashed var(--app-border-bold);
+  border-radius: 4px;
+  margin-bottom: 20px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--app-ink);
+
+  .loading-box {
+    display: inline-block;
+    animation: editorialPulse 1.2s infinite ease-in-out;
+  }
+}
+
+@keyframes editorialPulse {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
