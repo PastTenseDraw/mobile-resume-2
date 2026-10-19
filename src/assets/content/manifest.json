@@ -4,7 +4,9 @@
   "skills": "assets/content/skills.md",
   "certifications": "assets/content/certifications.md",
   "experiences": [
-    "assets/content/experiences/h-e-b.md"
+    "assets/content/experiences/h-e-b.md",
+    "assets/content/experiences/capital-one.md",
+    "assets/content/experiences/capital-one-2.md"
   ],
   "blogs": [
     "assets/content/blogs/monochrome-editorial-ui.md",
