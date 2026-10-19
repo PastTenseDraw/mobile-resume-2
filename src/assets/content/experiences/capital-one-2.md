@@ -6,7 +6,7 @@ period: Feb 2020 - Feb 2021
 location: Plano, TX (Remote)
 isCurrent: false
 highlightMetric: One-stop-shop for all data visualization needs for the Auto Navigator marketing team
-technologies: Python, SQL, Javascript, D3.js, Bootstrap
+technologies: Python, SQL, Javascript, HTML, CSS, D3.js, Bootstrap
 order: 3
 ---
 
