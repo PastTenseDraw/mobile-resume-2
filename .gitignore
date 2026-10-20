@@ -30,6 +30,11 @@ yarn-error.log
 .DS_Store
 Thumbs.db
 
+# Environment configs (protect keys from git)
+src/environments/environment.ts
+src/environments/environment.prod.ts
+!src/environments/environment.example.ts
+
 # Firebase
 .firebase/
 firebase-debug.log

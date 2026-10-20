@@ -12,6 +12,7 @@ import {
   IonToast,
 } from '@ionic/angular';
 import { ResumeService } from '../services/resume.service';
+import { AnalyticsService } from '../services/analytics.service';
 import { BlogPost } from '../models/resume.model';
 
 @Component({
@@ -33,6 +34,7 @@ import { BlogPost } from '../models/resume.model';
 })
 export class Tab3Page {
   readonly resumeService = inject(ResumeService);
+  private readonly analytics = inject(AnalyticsService);
 
   readonly selectedCategory = signal<string>('All');
   readonly activePost = signal<BlogPost | null>(null);
@@ -68,6 +70,7 @@ export class Tab3Page {
   openReader(post: BlogPost) {
     this.activePost.set(post);
     this.isReaderOpen.set(true);
+    this.analytics.trackBlogRead(post.id, post.title, post.category);
   }
 
   closeReader() {

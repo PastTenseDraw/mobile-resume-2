@@ -9,6 +9,7 @@ import {
   IonToast,
 } from '@ionic/angular';
 import { ResumeService } from '../services/resume.service';
+import { AnalyticsService } from '../services/analytics.service';
 
 @Component({
   selector: 'app-tab1',
@@ -26,6 +27,7 @@ import { ResumeService } from '../services/resume.service';
 })
 export class Tab1Page {
   readonly resumeService = inject(ResumeService);
+  private readonly analytics = inject(AnalyticsService);
 
   toastMessage = '';
   isToastOpen = false;
@@ -36,5 +38,14 @@ export class Tab1Page {
       this.toastMessage = `Copied ${label} to clipboard: ${text}`;
       this.isToastOpen = true;
     }
+    this.analytics.trackContactClick('email', text);
+  }
+
+  onContactClick(channel: 'github' | 'linkedin' | 'phone', value?: string) {
+    this.analytics.trackContactClick(channel, value);
+  }
+
+  onResumeDownload() {
+    this.analytics.trackResumeDownload();
   }
 }

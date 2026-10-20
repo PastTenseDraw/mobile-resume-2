@@ -7,6 +7,7 @@ import {
   IonIcon,
 } from '@ionic/angular';
 import { ResumeService } from '../services/resume.service';
+import { AnalyticsService } from '../services/analytics.service';
 
 @Component({
   selector: 'app-tab2',
@@ -22,11 +23,13 @@ import { ResumeService } from '../services/resume.service';
 })
 export class Tab2Page {
   readonly resumeService = inject(ResumeService);
+  private readonly analytics = inject(AnalyticsService);
 
   readonly selectedFilter = signal<string>('all');
 
-  filterRoles(filter: string) {
-    this.selectedFilter.set(filter);
+  filterRoles(filterName: string) {
+    this.selectedFilter.set(filterName);
+    this.analytics.trackExperienceFilter(filterName);
   }
 
   get filteredExperiences() {
